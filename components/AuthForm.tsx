@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { createAccount } from "@/lib/actions/user.actions";
+import OTPModal from "./OTPModal";
 
 type formType = "sign-in" | "sign-up";
 
@@ -121,7 +122,7 @@ const AuthForm = ({ type }: { type: "" }) => {
             className="form-submit-button"
             disabled={isLoading}
           >
-            {type === " sign-in" ? "Sign In" : "Sign Up"}
+            {type === "sign-in" ? "Sign In" : "Sign Up"}
 
             {isLoading && (
               <Image
@@ -152,6 +153,12 @@ const AuthForm = ({ type }: { type: "" }) => {
           </div>
         </form>
       </Form>
+
+      {/* OTP Verification */}
+
+      {accountId && (
+        <OTPModal email={form.getValues("email")} accountId={accountId} />
+      )}
     </>
   );
 };
